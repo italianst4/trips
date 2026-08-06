@@ -777,6 +777,37 @@ svg.leaflet-image-layer.leaflet-interactive path {
     letter-spacing:.14em;
     opacity:.78;
   }
+  /* ============ SPREADSHEET CTA ============ */
+  .sheetbox{
+    margin-top:22px;
+    background:var(--paper);
+    border:1px solid var(--sand);
+    border-radius:16px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 1px 2px rgba(60,42,20,.05);
+  }
+  .sheetbtn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    background:var(--sea);
+    color:var(--cream);
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+    padding:13px 24px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(12,58,85,.18);
+    transition:background .15s ease,transform .15s ease;
+  }
+  .sheetbtn:hover{background:var(--sea-dark);transform:translateY(-1px);}
+  .sheetnote{
+    margin:12px auto 0;
+    max-width:520px;
+    font-size:13px;
+    color:var(--muted);
+  }
   .wave{position:absolute;bottom:-1px;left:0;width:100%;height:58px;display:block;}
 
   /* ============ SECTIONS ============ */
@@ -958,6 +989,91 @@ svg.leaflet-image-layer.leaflet-interactive path {
     border-radius:10px;
   }
   .staycard .btn:hover{background:var(--sea-dark);}
+  .staycard .shot{
+    margin:-20px -20px 5px;
+    height:165px;
+    overflow:hidden;
+    border-radius:15px 15px 0 0;
+    cursor:zoom-in;
+  }
+  .staycard .shot img{
+    display:block;
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:transform .4s ease;
+  }
+  .staycard:hover .shot img{transform:scale(1.05);}
+
+  /* ============ PHOTOS ============ */
+  .photos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(185px,1fr));
+    gap:10px;
+    margin:6px 0 12px 47px;
+  }
+  .photo{
+    margin:0;
+    background:var(--paper);
+    border:1px solid var(--sand);
+    border-radius:12px;
+    overflow:hidden;
+    cursor:zoom-in;
+    box-shadow:0 1px 2px rgba(60,42,20,.05);
+  }
+  .photo img{
+    display:block;
+    width:100%;
+    height:145px;
+    object-fit:cover;
+    background:#E8EEF1;
+    transition:transform .4s ease;
+  }
+  .photo:hover img{transform:scale(1.05);}
+  .photo figcaption{
+    font-size:11.5px;
+    color:var(--soft-muted);
+    padding:7px 10px 8px;
+  }
+
+  /* ============ LIGHTBOX ============ */
+  .lightbox{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:26px;
+    background:rgba(10,30,44,.92);
+    cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:100%;
+    max-height:80vh;
+    border-radius:12px;
+    box-shadow:0 16px 50px rgba(0,0,0,.55);
+  }
+  .lightbox .cap{
+    position:absolute;
+    left:0;right:0;bottom:24px;
+    text-align:center;
+    color:var(--cream);
+    font-size:13.5px;
+    opacity:.88;
+    padding:0 26px;
+  }
+  .lightbox .x{
+    position:absolute;
+    top:16px;right:20px;
+    color:var(--cream);
+    font-size:30px;
+    line-height:1;
+    opacity:.7;
+    background:none;border:none;
+    cursor:pointer;
+  }
+  .lightbox .x:hover{opacity:1;}
 
   /* ============ FLIGHTS TABLE ============ */
   .tablewrap{
@@ -1060,6 +1176,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .datebadge .md{font-size:19px;}
     .daycard{padding:16px 16px 6px;}
     .legmap{margin-left:0;height:185px;}
+    .photos{margin-left:0;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;}
+    .photo img{height:120px;}
   }
 </style>
 </head>
@@ -1164,6 +1282,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">Castellammare — Night 1</div>
             <div class="m">Staying with Anna's family</div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/castellammare.webp" alt="Castellammare del Golfo harbour" loading="lazy"><figcaption>Castellammare del Golfo</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1178,6 +1299,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
           <div class="ev"><div class="ic stay">🏠</div><div class="body">
             <div class="t">Castellammare — Night 2</div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/castellammare-san-vito-lo-capo.jpg" alt="The beach at San Vito Lo Capo" loading="lazy"><figcaption>San Vito Lo Capo</figcaption></figure>
+            <figure class="photo"><img src="images/castellammare-scopello.jpg" alt="The sea stacks at Scopello" loading="lazy"><figcaption>Scopello, just up the coast</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1212,6 +1337,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">Cefalù — 1 night</div>
             <div class="m">Hotel to be chosen</div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/cefalu.jpg" alt="Cefalù old town and beach under the Rocca" loading="lazy"><figcaption>Cefalù, under the Rocca</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1228,6 +1356,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">Check in: Capo Taormina — Night 1 <span class="chip">≈ $400 / night</span></div>
             <div class="m">Hotel built into the cliffside with an amazing pool and beach · <a href="https://www.unaitalianhospitality.com/en/hotels/una-hotels-capotaormina" target="_blank" rel="noopener">see the hotel</a></div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/capotaormina-pool.jpeg" alt="The pool at Hotel Capo Taormina" loading="lazy"><figcaption>The pool at Capo Taormina</figcaption></figure>
+            <figure class="photo"><img src="images/capotaormina-beach.jpg" alt="The private beach below Hotel Capo Taormina" loading="lazy"><figcaption>The hotel's beach</figcaption></figure>
+            <figure class="photo"><img src="images/taourmina-isola-bella.webp" alt="Isola Bella island near Taormina" loading="lazy"><figcaption>Isola Bella, next door</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1242,6 +1375,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
           <div class="ev"><div class="ic stay">🏨</div><div class="body">
             <div class="t">Capo Taormina — Night 2</div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/mt-enta.jpg" alt="Mount Etna" loading="lazy"><figcaption>Mt Etna</figcaption></figure>
+            <figure class="photo"><img src="images/mt-enta-wine-tasting.webp" alt="Wine tasting on the slopes of Mount Etna" loading="lazy"><figcaption>Wine tasting on the slopes</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1256,6 +1393,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
           <div class="ev"><div class="ic stay">🏨</div><div class="body">
             <div class="t">Capo Taormina — Night 3</div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/taormina-greek-theatre.jpg" alt="The ancient Greek theatre in Taormina" loading="lazy"><figcaption>The ancient Greek theatre</figcaption></figure>
+            <figure class="photo"><img src="images/taormina-piazza.webp" alt="A piazza in Taormina" loading="lazy"><figcaption>Piazza IX Aprile</figcaption></figure>
+            <figure class="photo"><img src="images/taormina-shopping.jpg" alt="Shops along Corso Umberto in Taormina" loading="lazy"><figcaption>Shopping on Corso Umberto</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1275,6 +1417,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">Catania — 1 night</div>
             <div class="m">Hotel to be chosen</div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/catania.jpeg" alt="Catania, with Mount Etna behind the city" loading="lazy"><figcaption>Catania, with Etna behind it</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1291,6 +1436,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">QC Termeroma — 1 night <span class="chip">≈ $350</span></div>
             <div class="m">Wellness hotel with an amazing outdoor spa experience · <a href="https://www.qcterme.com/destinations/roma" target="_blank" rel="noopener">see the spa</a></div>
           </div></div>
+          <div class="photos">
+            <figure class="photo"><img src="images/qc-termeroma-pools.avif" alt="The outdoor pools at QC Termeroma" loading="lazy"><figcaption>The outdoor pools</figcaption></figure>
+            <figure class="photo"><img src="images/qc-termeroma-waterfalls.jpg" alt="The waterfall pools at QC Termeroma" loading="lazy"><figcaption>The waterfalls</figcaption></figure>
+            <figure class="photo"><img src="images/QC-Termeroma-Map-1024x657.webp" alt="Map of the QC Termeroma spa grounds" loading="lazy"><figcaption>Map of the spa grounds</figcaption></figure>
+          </div>
         </div>
       </div>
 
@@ -1317,27 +1467,32 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <h2>The five stays</h2>
     <div class="stays">
       <div class="staycard">
+        <div class="shot"><img src="images/castellammare.webp" alt="Castellammare del Golfo" loading="lazy"></div>
         <div class="when">May 21 – 24 · 3 nights</div>
         <div class="town">🌊 Castellammare del Golfo</div>
         <p class="desc">Home base on the west coast, staying with Anna's family. Day trips to San Vito Lo Capo and time around town.</p>
       </div>
       <div class="staycard">
+        <div class="shot"><img src="images/cefalu.jpg" alt="Cefalù" loading="lazy"></div>
         <div class="when">May 24 – 25 · 1 night</div>
         <div class="town">🏖️ Cefalù</div>
         <p class="desc">One evening in the postcard beach town under the Rocca — explore the old town and have dinner by the water. Hotel to be chosen.</p>
       </div>
       <div class="staycard">
+        <div class="shot"><img src="images/capotaormina-pool.jpeg" alt="The pool at Hotel Capo Taormina" loading="lazy"></div>
         <div class="when">May 25 – 28 · 3 nights · ≈ $400/night</div>
         <div class="town">🎭 Capo Taormina</div>
         <p class="desc">Incredible hotel built into the side of the cliff with an amazing pool and beach. Base for Mt Etna and downtown Taormina.</p>
         <a class="btn" href="https://www.unaitalianhospitality.com/en/hotels/una-hotels-capotaormina" target="_blank" rel="noopener">View hotel →</a>
       </div>
       <div class="staycard">
+        <div class="shot"><img src="images/catania.jpeg" alt="Catania" loading="lazy"></div>
         <div class="when">May 28 – 29 · 1 night</div>
         <div class="town">🌋 Catania</div>
         <p class="desc">Last night on the island — dinner in Catania before the morning flight to Rome. Hotel to be chosen.</p>
       </div>
       <div class="staycard">
+        <div class="shot"><img src="images/qc-termeroma-pools.avif" alt="The outdoor pools at QC Termeroma" loading="lazy"></div>
         <div class="when">May 29 – 30 · 1 night · ≈ $350</div>
         <div class="town">🧖 QC Termeroma, Rome</div>
         <p class="desc">Wellness hotel with an amazing outdoor spa experience — the perfect wind-down before flying home.</p>
@@ -1415,8 +1570,19 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <p>All prices on this page are estimates from our planning sheet, in USD. Flights and hotels aren't locked in yet, so numbers may shift.</p>
       </div>
     </div>
+    <div class="sheetbox">
+      <a class="sheetbtn" href="https://docs.google.com/spreadsheets/d/1ybtAB595mq59Qj-ZrpMmQVKkCexP5kMiNFKmzWQFZYY/edit?usp=sharing" target="_blank" rel="noopener">📋 Open the trip spreadsheet →</a>
+      <p class="sheetnote">Flights, hotels, confirmation numbers, and costs — lives in the spreadsheet. Please request access when you open it and we'll approve you.</p>
+    </div>
   </div>
 </section>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lightbox-close" aria-label="Close photo">×</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="cap" id="lightbox-cap"></div>
+</div>
 
 <!-- ================= FOOTER ================= -->
 <footer>
@@ -1494,6 +1660,41 @@ const D4=[[37.8461,15.2966],[37.8539,15.3009],[37.86,15.2953],[37.8686,15.2967],
   drive('map-d4',D4,'Taormina','Catania','left','right');
   flight('map-f3',CTA,FCO,'Catania','Rome','bottom','top');
   flight('map-f4',FCO,YYZ,'Rome','Toronto');
+})();
+</script>
+
+<script>
+/* ---------- Photo lightbox ---------- */
+(function(){
+  const box=document.getElementById('lightbox'),
+        img=document.getElementById('lightbox-img'),
+        cap=document.getElementById('lightbox-cap');
+
+  function open(src,alt,caption){
+    img.src=src; img.alt=alt||'';
+    cap.textContent=caption||alt||'';
+    box.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    box.classList.remove('open');
+    img.src='';
+    document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('.photo, .staycard .shot').forEach(function(el){
+    el.addEventListener('click',function(){
+      const i=el.querySelector('img');
+      if(!i)return;
+      const fig=el.querySelector('figcaption');
+      open(i.getAttribute('src'),i.alt,fig?fig.textContent:i.alt);
+    });
+  });
+
+  box.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape')close();
+  });
 })();
 </script>
 </body>
