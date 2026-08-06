@@ -830,37 +830,67 @@ svg.leaflet-image-layer.leaflet-interactive path {
   /* ============ ROUTE ============ */
   .route{
     display:flex;
-    flex-wrap:wrap;
-    align-items:flex-start;
-    gap:16px 2px;
-    padding:14px 2px 14px;
+    flex-direction:column;
+    max-width:560px;
+    padding:14px 0 6px;
   }
-  .stop{flex:0 0 auto;min-width:0;text-align:center;padding:0 7px;}
-  .stop .dot{
-    width:52px;height:52px;
-    border-radius:50%;
+  .stop{
+    display:flex;
+    align-items:center;
+    gap:14px;
     background:var(--paper);
+    border:1px solid var(--sand);
+    border-radius:14px;
+    padding:11px 16px;
+    box-shadow:0 1px 2px rgba(60,42,20,.05);
+  }
+  .stop .dot{
+    flex:none;
+    width:46px;height:46px;
+    border-radius:50%;
+    background:var(--cream);
     border:2px solid var(--sand);
     display:grid;place-items:center;
-    margin:0 auto 8px;
-    font-size:22px;
-    box-shadow:0 1px 3px rgba(60,42,20,.08);
+    font-size:21px;
   }
+  .stop.major{border-color:#E7CFC2;}
   .stop.major .dot{border-color:var(--terra);}
-  .stop .name{font-weight:600;font-size:13px;color:var(--deep);line-height:1.25;}
-  .stop .nts{font-size:11px;color:var(--soft-muted);margin-top:2px;}
-  .leg{
-    flex:0 0 auto;
-    min-width:0;
-    padding:13px 3px 0;
-    text-align:center;
+  .stop .name{
+    flex:1;
+    font-weight:600;
+    font-size:15px;
+    color:var(--deep);
+    line-height:1.25;
+  }
+  .stop .nts{
+    flex:none;
+    font-size:11.5px;
+    font-weight:600;
     color:var(--soft-muted);
-    font-size:10.5px;
+    text-align:right;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .leg{
+    display:flex;
+    align-items:center;
+    padding:5px 0;
+    color:var(--soft-muted);
+    font-size:11.5px;
     font-weight:600;
     white-space:nowrap;
   }
-  .leg .line{color:#CDB98E;font-size:21px;line-height:1;margin-bottom:1px;}
-  .leg .line::before{content:"⟶";}
+  .leg .line{
+    flex:none;
+    width:46px;
+    margin-left:16px;
+    text-align:center;
+    color:#CDB98E;
+    font-size:21px;
+    line-height:1;
+  }
+  .leg .line::before{content:"↓";}
+  .leg .what{margin-left:14px;}
 
   /* ============ TIMELINE ============ */
   .timeline{position:relative;margin-top:10px;}
@@ -1176,6 +1206,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .datebadge .md{font-size:19px;}
     .daycard{padding:16px 16px 6px;}
     .legmap{margin-left:0;height:185px;}
+    .stop{gap:11px;padding:10px 13px;}
+    .stop .dot{width:40px;height:40px;font-size:18px;}
+    .stop .name{font-size:14px;}
+    .stop .nts{font-size:10.5px;}
+    .leg .line{width:40px;margin-left:13px;}
+    .leg .what{margin-left:11px;font-size:11px;}
     .photos{margin-left:0;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;}
     .photo img{height:120px;}
   }
@@ -1219,21 +1255,21 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <p class="sectionintro">Fly into Rome, hop to Trapani on Sicily's west coast, then road-trip east along the north shore — ending with a short flight back through Rome.</p>
     <div class="route">
       <div class="stop"><div class="dot">🍁</div><div class="name">Toronto</div><div class="nts">Depart May 20</div></div>
-      <div class="leg"><div class="line"></div>✈ AC 890</div>
+      <div class="leg"><div class="line"></div><span class="what">✈ AC 890 · overnight</span></div>
       <div class="stop"><div class="dot">🏛️</div><div class="name">Rome</div><div class="nts">Change planes</div></div>
-      <div class="leg"><div class="line"></div>✈ FR 8915</div>
+      <div class="leg"><div class="line"></div><span class="what">✈ FR 8915</span></div>
       <div class="stop"><div class="dot">🛬</div><div class="name">Trapani</div><div class="nts">Pick up car</div></div>
-      <div class="leg"><div class="line"></div>🚗 45 min</div>
+      <div class="leg"><div class="line"></div><span class="what">🚗 45 min</span></div>
       <div class="stop major"><div class="dot">🌊</div><div class="name">Castellammare</div><div class="nts">3 nights</div></div>
-      <div class="leg"><div class="line"></div>🚗 1 h 45</div>
+      <div class="leg"><div class="line"></div><span class="what">🚗 1 h 45</span></div>
       <div class="stop major"><div class="dot">🏖️</div><div class="name">Cefalù</div><div class="nts">1 night</div></div>
-      <div class="leg"><div class="line"></div>🚗 2 h 15</div>
+      <div class="leg"><div class="line"></div><span class="what">🚗 2 h 15</span></div>
       <div class="stop major"><div class="dot">🎭</div><div class="name">Taormina</div><div class="nts">3 nights</div></div>
-      <div class="leg"><div class="line"></div>🚗 drive</div>
+      <div class="leg"><div class="line"></div><span class="what">🚗 1 hour</span></div>
       <div class="stop major"><div class="dot">🌋</div><div class="name">Catania</div><div class="nts">1 night</div></div>
-      <div class="leg"><div class="line"></div>✈ AZ 1724</div>
+      <div class="leg"><div class="line"></div><span class="what">✈ AZ 1724</span></div>
       <div class="stop major"><div class="dot">🧖</div><div class="name">Rome</div><div class="nts">1 night</div></div>
-      <div class="leg"><div class="line"></div>✈ AC 891</div>
+      <div class="leg"><div class="line"></div><span class="what">✈ AC 891</span></div>
       <div class="stop"><div class="dot">🏠</div><div class="name">Toronto</div><div class="nts">Home May 30</div></div>
     </div>
   </div>
@@ -1407,7 +1443,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
           <div class="daytitle">On to Catania <span class="loc">Catania</span></div>
           <div class="ev"><div class="ic drive">🚗</div><div class="body">
             <div class="t">Drive Taormina → Catania</div>
-            <div class="m">Short hop down the coast · <a class="gml" href="https://www.google.com/maps/dir/?api=1&amp;origin=Taormina&amp;destination=Catania&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps ↗</a></div>
+            <div class="m">About 1 hour down the coast · <a class="gml" href="https://www.google.com/maps/dir/?api=1&amp;origin=Taormina&amp;destination=Catania&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps ↗</a></div>
           </div></div>
           <div class="legmap" id="map-d4"></div>
           <div class="ev"><div class="ic fun">🍝</div><div class="body">
