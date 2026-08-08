@@ -988,7 +988,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   }
 
   /* ============ STAYS ============ */
-  .stays{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:8px;}
+  .stays{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px;}
   .staycard{
     background:var(--paper);
     border:1px solid var(--sand);
@@ -1059,6 +1059,11 @@ svg.leaflet-image-layer.leaflet-interactive path {
     transition:transform .4s ease;
   }
   .photo:hover img{transform:scale(1.05);}
+  .photo.contain img{object-fit:contain;background:#fff;}
+  /* half-width photo strip: the single figure fills one of two columns */
+  .photos.half{grid-template-columns:repeat(2,1fr);}
+  /* keep the image's own aspect ratio instead of cropping to a fixed height */
+  .photo.natural img{height:auto;}
   .photo figcaption{
     font-size:11.5px;
     color:var(--soft-muted);
@@ -1131,7 +1136,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   td .sub{font-size:12px;color:var(--soft-muted);}
 
   /* ============ NOTES ============ */
-  .notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:8px;}
+  .notes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px;}
   .notecard{
     background:var(--paper);
     border:1px solid var(--sand);
@@ -1140,6 +1145,200 @@ svg.leaflet-image-layer.leaflet-interactive path {
   }
   .notecard .nt{font-weight:600;color:var(--deep);font-size:14.5px;margin-bottom:4px;}
   .notecard p{font-size:13.5px;color:var(--muted);}
+
+  /* ============ BUDGET ============ */
+  .budget .amt{text-align:right;white-space:nowrap;}
+  .budget th:first-child{width:34%;}
+  .pctinput{
+    font:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--deep);
+    width:62px;
+    padding:5px 8px;
+    margin-right:2px;
+    text-align:right;
+    background:var(--cream);
+    border:1px solid var(--sand);
+    border-radius:8px;
+  }
+  .pctinput:focus{outline:2px solid var(--sea);outline-offset:1px;}
+  .amtinput{
+    font:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--deep);
+    width:88px;
+    padding:5px 8px;
+    text-align:right;
+    background:var(--cream);
+    border:1px solid var(--sand);
+    border-radius:8px;
+  }
+  .amtinput:focus{outline:2px solid var(--sea);outline-offset:1px;}
+  .amtsym{font-size:13px;color:var(--soft-muted);margin-right:5px;}
+  .opt-row.off .amtinput{opacity:.6;}
+  .budget .cat{font-weight:600;color:var(--deep);}
+  .budget tr.total td{
+    background:#F7F0E1;
+    border-top:1px solid var(--sand);
+    border-bottom:none;
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--deep);
+  }
+  .budget tr.shared-row td{background:#FBF7EE;}
+  .budget tr.subtotal td{
+    background:#F7F0E1;
+    border-bottom:1px solid var(--sand);
+    padding-top:9px;
+    padding-bottom:9px;
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--soft-muted);
+  }
+  .budget tr.subtotal .amt{
+    font-size:14px;
+    letter-spacing:0;
+    text-transform:none;
+    color:var(--deep);
+  }
+  .shared{
+    display:inline-block;
+    margin-left:8px;
+    background:#E3EEF5;
+    border:1px solid #C6DCE9;
+    color:var(--sea);
+    border-radius:999px;
+    padding:1px 9px;
+    font-size:10.5px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    vertical-align:1.5px;
+  }
+  .budgetnote{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:14px;
+    max-width:660px;
+  }
+
+  /* ============ CURRENCY SWITCH ============ */
+  .curbar{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px 16px;
+    margin:18px 0 4px;
+  }
+  .curswitch{
+    display:inline-flex;
+    background:var(--paper);
+    border:1px solid var(--sand);
+    border-radius:999px;
+    padding:4px;
+    gap:2px;
+    box-shadow:0 1px 2px rgba(60,42,20,.05);
+  }
+  .curswitch button{
+    font:inherit;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    background:none;
+    border:none;
+    border-radius:999px;
+    padding:7px 16px;
+    cursor:pointer;
+    transition:background .15s ease,color .15s ease;
+  }
+  .curswitch button:hover{color:var(--deep);}
+  .curswitch button[aria-pressed="true"]{
+    background:var(--sea);
+    color:var(--cream);
+  }
+  .currate{font-size:12px;color:var(--soft-muted);}
+
+  /* ============ OPTIONAL EXTRAS ============ */
+  .optcheck{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .optcheck input{
+    width:16px;height:16px;
+    accent-color:var(--sea);
+    cursor:pointer;
+    flex:none;
+  }
+  .opt-row td{transition:opacity .15s ease;}
+  .opt-row.off td{opacity:.45;}
+  .opt-row.off .amt{text-decoration:line-through;}
+  .budget tr.grouphead td{
+    background:#F7F0E1;
+    border-top:1px solid var(--sand);
+    border-bottom:1px solid var(--sand);
+    padding:10px 18px;
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--terra);
+  }
+  .budget tr.grouphead .hint{
+    text-transform:none;
+    letter-spacing:0;
+    font-weight:500;
+    font-size:12.5px;
+    color:var(--soft-muted);
+  }
+
+  /* ============ SPENDING MONEY ============ */
+  .subhead{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:clamp(24px,3.4vw,30px);
+    font-weight:600;
+    color:var(--deep);
+    margin:46px 0 8px;
+  }
+  .foodpick{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:6px 13px;
+    margin-bottom:9px;
+  }
+  .foodswitch button{padding:6px 13px;font-size:12.5px;}
+  .foodblurb{font-size:12.5px;color:var(--soft-muted);}
+  .foodbasis{font-size:13px;color:var(--muted);}
+  .foodbasis + .foodbasis{margin-top:2px;font-size:12.5px;color:var(--soft-muted);}
+  .grandtotal{
+    margin-top:20px;
+    background:var(--sea-dark);
+    color:var(--cream);
+    border-radius:16px;
+    padding:22px 26px;
+  }
+  .grandtotal .lbl{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .grandtotal .big{
+    font-family:'Fraunces',Georgia,serif;
+    font-size:clamp(30px,5vw,40px);
+    font-weight:600;
+    line-height:1.15;
+    margin:6px 0 4px;
+  }
+  .grandtotal .brk{font-size:13.5px;opacity:.85;}
 
   /* ============ FOOTER ============ */
   footer{
@@ -1206,6 +1405,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     .datebadge .md{font-size:19px;}
     .daycard{padding:16px 16px 6px;}
     .legmap{margin-left:0;height:185px;}
+    .stays,.notes{grid-template-columns:1fr;}
     .stop{gap:11px;padding:10px 13px;}
     .stop .dot{width:40px;height:40px;font-size:18px;}
     .stop .name{font-size:14px;}
@@ -1225,7 +1425,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <div class="eyebrow">The Family Trip · May 2027</div>
     <h1>Sicily</h1>
     <div class="dates">May 20 – 30, 2027 · Toronto → Sicily → Rome → Toronto</div>
-    <p class="tagline">Eleven days together — sea towns on the west coast, a night in Cefalù, three days under Mt&nbsp;Etna in Taormina, and a Roman spa finish before flying home.</p>
+    <p class="tagline">Eleven days together — sea towns on the west coast, two nights in Cefalù, three days under Mt&nbsp;Etna in Taormina, and a Roman spa finish before flying home.</p>
     <div class="travelers">
       <span class="traveler">Anthony</span>
       <span class="traveler">Kaytee</span>
@@ -1238,8 +1438,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div class="stat"><b>11</b><span>Days</span></div>
       <div class="stat"><b>9</b><span>Nights</span></div>
       <div class="stat"><b>4</b><span>Flights</span></div>
-      <div class="stat"><b>5</b><span>Hotels</span></div>
-      <div class="stat"><b>1</b><span>Car Rental</span></div>
+      <div class="stat"><b>4</b><span>Hotels</span></div>
+      <div class="stat"><b>2</b><span>Rental Cars</span></div>
     </div>
   </div>
   <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
@@ -1262,12 +1462,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div class="leg"><div class="line"></div><span class="what">🚗 45 min</span></div>
       <div class="stop major"><div class="dot">🌊</div><div class="name">Castellammare</div><div class="nts">3 nights</div></div>
       <div class="leg"><div class="line"></div><span class="what">🚗 1 h 45</span></div>
-      <div class="stop major"><div class="dot">🏖️</div><div class="name">Cefalù</div><div class="nts">1 night</div></div>
+      <div class="stop major"><div class="dot">🏖️</div><div class="name">Cefalù</div><div class="nts">2 nights</div></div>
       <div class="leg"><div class="line"></div><span class="what">🚗 2 h 15</span></div>
       <div class="stop major"><div class="dot">🎭</div><div class="name">Taormina</div><div class="nts">3 nights</div></div>
       <div class="leg"><div class="line"></div><span class="what">🚗 1 hour</span></div>
-      <div class="stop major"><div class="dot">🌋</div><div class="name">Catania</div><div class="nts">1 night</div></div>
-      <div class="leg"><div class="line"></div><span class="what">✈ AZ 1724</span></div>
+      <div class="stop"><div class="dot">🌋</div><div class="name">Catania</div><div class="nts">Drop off cars</div></div>
+      <div class="leg"><div class="line"></div><span class="what">✈ AZ 1754</span></div>
       <div class="stop major"><div class="dot">🧖</div><div class="name">Rome</div><div class="nts">1 night</div></div>
       <div class="leg"><div class="line"></div><span class="what">✈ AC 891</span></div>
       <div class="stop"><div class="dot">🏠</div><div class="name">Toronto</div><div class="nts">Home May 30</div></div>
@@ -1280,7 +1480,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
   <div class="wrap">
     <div class="eyebrow2">Day by Day</div>
     <h2>The walkthrough</h2>
-    <p class="sectionintro">Every travel leg, stay, and plan — in order. Prices are estimates from our planning sheet, in USD.</p>
+    <p class="sectionintro">Every travel leg, stay, and plan — in order. Prices are estimates from our planning sheet.</p>
 
     <div class="timeline">
 
@@ -1289,8 +1489,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <div class="daycard">
           <div class="daytitle">Departure day <span class="loc">Toronto</span></div>
           <div class="ev"><div class="ic flight">✈️</div><div class="body">
-            <div class="t">Air Canada AC 890 — Toronto → Rome <span class="chip">≈ $500</span></div>
-            <div class="m">Departs 19:45 · overnight flight · lands in Rome 10:20 the next morning</div>
+            <div class="t">Air Canada AC 890 — Toronto → Rome <span class="chip"><span class="cur" data-usd="990">$990</span> round trip</span></div>
+            <div class="m">Departs 19:45 · overnight flight · lands in Rome 10:20 the next morning. The fare covers the return leg on May 30.</div>
           </div></div>
           <div class="legmap" id="map-f1"></div>
         </div>
@@ -1305,21 +1505,31 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="m">Time to stretch, eat, and change planes</div>
           </div></div>
           <div class="ev"><div class="ic flight">✈️</div><div class="body">
-            <div class="t">Ryanair FR 8915 — Rome → Trapani <span class="chip">≈ $110</span></div>
+            <div class="t">Ryanair FR 8915 — Rome → Trapani <span class="chip"><span class="cur" data-usd="110">$110</span></span></div>
             <div class="m">Departs 14:40 · arrives 15:50</div>
           </div></div>
           <div class="legmap" id="map-f2"></div>
           <div class="ev"><div class="ic drive">🚗</div><div class="body">
-            <div class="t">Pick up the rental car in Trapani</div>
-            <div class="m">~45-minute drive to Castellammare del Golfo (17:00 → 18:00) · <a class="gml" href="https://www.google.com/maps/dir/?api=1&amp;origin=Trapani+Airport&amp;destination=Castellammare+del+Golfo&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps ↗</a></div>
+            <div class="t">Pick up two rental cars in Trapani <span class="chip"><span class="cur" data-usd="800">$800</span> each</span></div>
+            <div class="m">Hertz · Opel Corsa or similar — two cars for 6 people and luggage. Dropped off in Catania on May 29.</div>
+          </div></div>
+          <div class="photos half">
+            <figure class="photo contain"><img src="images/car-rental.webp" alt="Opel Corsa rental car" loading="lazy"><figcaption>Opel Corsa or similar — two of them</figcaption></figure>
+          </div>
+          <div class="ev"><div class="ic drive">🚗</div><div class="body">
+            <div class="t">Drive to Castellammare del Golfo</div>
+            <div class="m">~45 minutes (17:00 → 18:00) · <a class="gml" href="https://www.google.com/maps/dir/?api=1&amp;origin=Trapani+Airport&amp;destination=Castellammare+del+Golfo&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps ↗</a></div>
           </div></div>
           <div class="legmap" id="map-d1"></div>
-          <div class="ev"><div class="ic stay">🏠</div><div class="body">
-            <div class="t">Castellammare — Night 1</div>
-            <div class="m">Staying with Anna's family</div>
+          <div class="ev"><div class="ic stay">🏨</div><div class="body">
+            <div class="t">Marina di Petrolo — Night 1 <span class="chip"><span class="cur" data-usd="300">$300</span> / room</span></div>
+            <div class="m">Complimentary parking · visit Anna's family · <a href="https://www.marinadipetrolo.it/en" target="_blank" rel="noopener">see the hotel</a></div>
           </div></div>
           <div class="photos">
             <figure class="photo"><img src="images/castellammare.webp" alt="Castellammare del Golfo harbour" loading="lazy"><figcaption>Castellammare del Golfo</figcaption></figure>
+            <figure class="photo"><img src="images/marina-di-petrolo-infinity-pool.webp" alt="The infinity pool at Marina di Petrolo" loading="lazy"><figcaption>The hotel's infinity pool</figcaption></figure>
+            <figure class="photo"><img src="images/marina-di-petrolo-room.webp" alt="A sea-view room at Marina di Petrolo" loading="lazy"><figcaption>A sea-view room</figcaption></figure>
+            <figure class="photo"><img src="images/marina-di-petrolo-lobby.webp" alt="The tiled lobby at Marina di Petrolo" loading="lazy"><figcaption>The lobby</figcaption></figure>
           </div>
         </div>
       </div>
@@ -1332,8 +1542,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">Day trip to San Vito Lo Capo</div>
             <div class="m">One of Sicily's most famous beaches, about 40 minutes up the coast</div>
           </div></div>
-          <div class="ev"><div class="ic stay">🏠</div><div class="body">
-            <div class="t">Castellammare — Night 2</div>
+          <div class="ev"><div class="ic stay">🏨</div><div class="body">
+            <div class="t">Marina di Petrolo — Night 2</div>
           </div></div>
           <div class="photos">
             <figure class="photo"><img src="images/castellammare-san-vito-lo-capo.jpg" alt="The beach at San Vito Lo Capo" loading="lazy"><figcaption>San Vito Lo Capo</figcaption></figure>
@@ -1350,8 +1560,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="t">Time with Anna's family</div>
             <div class="m">Slow day around town — no travel</div>
           </div></div>
-          <div class="ev"><div class="ic stay">🏠</div><div class="body">
-            <div class="t">Castellammare — Night 3</div>
+          <div class="ev"><div class="ic stay">🏨</div><div class="body">
+            <div class="t">Marina di Petrolo — Night 3</div>
           </div></div>
         </div>
       </div>
@@ -1370,17 +1580,37 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <div class="m">Old town, the Duomo, and the beachfront</div>
           </div></div>
           <div class="ev"><div class="ic stay">🏨</div><div class="body">
-            <div class="t">Cefalù — 1 night</div>
-            <div class="m">Hotel to be chosen</div>
+            <div class="t">Hotel Riva Del Sole — Night 1 <span class="chip"><span class="cur" data-usd="400">$400</span> / room</span></div>
+            <div class="m">Parking on site · <a href="https://www.rivadelsole.com/hotel-riva-del-sole-cefalu-english/" target="_blank" rel="noopener">see the hotel</a></div>
           </div></div>
           <div class="photos">
             <figure class="photo"><img src="images/cefalu.jpg" alt="Cefalù old town and beach under the Rocca" loading="lazy"><figcaption>Cefalù, under the Rocca</figcaption></figure>
+            <figure class="photo"><img src="images/hotel-riva-del-sole-patio-beach.jpg" alt="The terrace at Hotel Riva Del Sole overlooking the Cefalù beachfront" loading="lazy"><figcaption>The terrace over the beachfront</figcaption></figure>
+            <figure class="photo"><img src="images/riva-del-sole-room.jpg" alt="A room at Hotel Riva Del Sole" loading="lazy"><figcaption>A room at the hotel</figcaption></figure>
+            <figure class="photo"><img src="images/hotel-riva-del-sole-lobby.jpg" alt="The lobby at Hotel Riva Del Sole" loading="lazy"><figcaption>The lobby</figcaption></figure>
           </div>
         </div>
       </div>
 
       <div class="day">
         <div class="datebadge"><div class="dow">Tue</div><div class="md">May 25</div></div>
+        <div class="daycard">
+          <div class="daytitle">Pasta making <span class="loc">Cefalù</span></div>
+          <div class="ev"><div class="ic fun">🍝</div><div class="body">
+            <div class="t">Pasta making class in Cefalù <span class="chip"><span class="cur" data-usd="150">$150</span> / person</span></div>
+            <div class="m">A full day in town — no driving</div>
+          </div></div>
+          <div class="ev"><div class="ic stay">🏨</div><div class="body">
+            <div class="t">Hotel Riva Del Sole — Night 2</div>
+          </div></div>
+          <div class="photos half">
+            <figure class="photo natural"><img src="images/cefalu-pasta-making-class.jpg" alt="A group rolling fresh pasta at a class table" loading="lazy"><figcaption>Rolling our own pasta</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="datebadge"><div class="dow">Wed</div><div class="md">May 26</div></div>
         <div class="daycard">
           <div class="daytitle">On to Taormina <span class="loc">Taormina</span></div>
           <div class="ev"><div class="ic drive">🚗</div><div class="body">
@@ -1389,24 +1619,30 @@ svg.leaflet-image-layer.leaflet-interactive path {
           </div></div>
           <div class="legmap" id="map-d3"></div>
           <div class="ev"><div class="ic stay">🏨</div><div class="body">
-            <div class="t">Check in: Capo Taormina — Night 1 <span class="chip">≈ $400 / night</span></div>
-            <div class="m">Hotel built into the cliffside with an amazing pool and beach · <a href="https://www.unaitalianhospitality.com/en/hotels/una-hotels-capotaormina" target="_blank" rel="noopener">see the hotel</a></div>
+            <div class="t">Check in: Capo Taormina — Night 1 <span class="chip"><span class="cur" data-usd="400">$400</span> / room</span></div>
+            <div class="m">Hotel built into the cliffside with an amazing pool and beach · parking €27/day · <a href="https://www.unaitalianhospitality.com/en/hotels/una-hotels-capotaormina" target="_blank" rel="noopener">see the hotel</a></div>
           </div></div>
           <div class="photos">
+            <figure class="photo"><img src="images/capotaormina-aerial.jpeg" alt="Aerial view of Hotel Capo Taormina on its cliff and headland" loading="lazy"><figcaption>The hotel's headland from above</figcaption></figure>
             <figure class="photo"><img src="images/capotaormina-pool.jpeg" alt="The pool at Hotel Capo Taormina" loading="lazy"><figcaption>The pool at Capo Taormina</figcaption></figure>
             <figure class="photo"><img src="images/capotaormina-beach.jpg" alt="The private beach below Hotel Capo Taormina" loading="lazy"><figcaption>The hotel's beach</figcaption></figure>
+            <figure class="photo"><img src="images/capotaormina-room.jpeg" alt="A room with a balcony at Hotel Capo Taormina" loading="lazy"><figcaption>A room with a balcony</figcaption></figure>
             <figure class="photo"><img src="images/taourmina-isola-bella.webp" alt="Isola Bella island near Taormina" loading="lazy"><figcaption>Isola Bella, next door</figcaption></figure>
           </div>
         </div>
       </div>
 
       <div class="day">
-        <div class="datebadge"><div class="dow">Wed</div><div class="md">May 26</div></div>
+        <div class="datebadge"><div class="dow">Thu</div><div class="md">May 27</div></div>
         <div class="daycard">
-          <div class="daytitle">Mount Etna <span class="loc">Taormina</span></div>
-          <div class="ev"><div class="ic fun">🌋</div><div class="body">
-            <div class="t">Day trip to Mt Etna</div>
-            <div class="m">Europe's tallest active volcano, about an hour from Taormina</div>
+          <div class="daytitle">Mount Etna wineries <span class="loc">Taormina</span></div>
+          <div class="ev"><div class="ic fun">🍷</div><div class="body">
+            <div class="t">Day trip to the Mt Etna wineries <span class="chip"><span class="cur" data-usd="50">$50</span> / person</span></div>
+            <div class="m">Wine and food pairing on the slopes of Europe's tallest active volcano</div>
+          </div></div>
+          <div class="ev"><div class="ic drive">🚙</div><div class="body">
+            <div class="t">Private car for the day <span class="chip">≈ <span class="cur" data-usd="100">$100</span> / couple</span></div>
+            <div class="m">So nobody has to drive between tastings</div>
           </div></div>
           <div class="ev"><div class="ic stay">🏨</div><div class="body">
             <div class="t">Capo Taormina — Night 2</div>
@@ -1419,7 +1655,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       </div>
 
       <div class="day">
-        <div class="datebadge"><div class="dow">Thu</div><div class="md">May 27</div></div>
+        <div class="datebadge"><div class="dow">Fri</div><div class="md">May 28</div></div>
         <div class="daycard">
           <div class="daytitle">Taormina town <span class="loc">Taormina</span></div>
           <div class="ev"><div class="ic fun">⭐</div><div class="body">
@@ -1438,38 +1674,21 @@ svg.leaflet-image-layer.leaflet-interactive path {
       </div>
 
       <div class="day">
-        <div class="datebadge"><div class="dow">Fri</div><div class="md">May 28</div></div>
+        <div class="datebadge"><div class="dow">Sat</div><div class="md">May 29</div></div>
         <div class="daycard">
-          <div class="daytitle">On to Catania <span class="loc">Catania</span></div>
+          <div class="daytitle">Taormina → Catania → Rome <span class="loc">Rome</span></div>
           <div class="ev"><div class="ic drive">🚗</div><div class="body">
-            <div class="t">Drive Taormina → Catania</div>
+            <div class="t">Drive Taormina → Catania and drop off both cars</div>
             <div class="m">About 1 hour down the coast · <a class="gml" href="https://www.google.com/maps/dir/?api=1&amp;origin=Taormina&amp;destination=Catania&amp;travelmode=driving" target="_blank" rel="noopener">Google Maps ↗</a></div>
           </div></div>
           <div class="legmap" id="map-d4"></div>
-          <div class="ev"><div class="ic fun">🍝</div><div class="body">
-            <div class="t">Dinner in Catania</div>
-          </div></div>
-          <div class="ev"><div class="ic stay">🏨</div><div class="body">
-            <div class="t">Catania — 1 night</div>
-            <div class="m">Hotel to be chosen</div>
-          </div></div>
-          <div class="photos">
-            <figure class="photo"><img src="images/catania.jpeg" alt="Catania, with Mount Etna behind the city" loading="lazy"><figcaption>Catania, with Etna behind it</figcaption></figure>
-          </div>
-        </div>
-      </div>
-
-      <div class="day">
-        <div class="datebadge"><div class="dow">Sat</div><div class="md">May 29</div></div>
-        <div class="daycard">
-          <div class="daytitle">Back to Rome <span class="loc">Rome</span></div>
           <div class="ev"><div class="ic flight">✈️</div><div class="body">
-            <div class="t">ITA Airways AZ 1724 — Catania → Rome <span class="chip">≈ $100</span></div>
-            <div class="m">Departs 12:00 · arrives 13:30</div>
+            <div class="t">ITA Airways AZ 1754 — Catania → Rome <span class="chip"><span class="cur" data-usd="100">$100</span></span></div>
+            <div class="m">Departs 15:25 · arrives 16:45</div>
           </div></div>
           <div class="legmap" id="map-f3"></div>
           <div class="ev"><div class="ic stay">🧖</div><div class="body">
-            <div class="t">QC Termeroma — 1 night <span class="chip">≈ $350</span></div>
+            <div class="t">QC Termeroma — 1 night <span class="chip"><span class="cur" data-usd="350">$350</span> / room</span></div>
             <div class="m">Wellness hotel with an amazing outdoor spa experience · <a href="https://www.qcterme.com/destinations/roma" target="_blank" rel="noopener">see the spa</a></div>
           </div></div>
           <div class="photos">
@@ -1485,8 +1704,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
         <div class="daycard">
           <div class="daytitle">Home 🍁 <span class="loc">Toronto</span></div>
           <div class="ev"><div class="ic flight">✈️</div><div class="body">
-            <div class="t">Air Canada AC 891 — Rome → Toronto <span class="chip">≈ $500</span></div>
-            <div class="m">Departs 12:25 · lands in Toronto 16:00</div>
+            <div class="t">Air Canada AC 891 — Rome → Toronto</div>
+            <div class="m">Departs 12:25 · lands in Toronto 14:00 · return leg of the AC 890 round trip</div>
           </div></div>
           <div class="legmap" id="map-f4"></div>
         </div>
@@ -1500,37 +1719,34 @@ svg.leaflet-image-layer.leaflet-interactive path {
 <section id="stays">
   <div class="wrap">
     <div class="eyebrow2">Where We're Sleeping</div>
-    <h2>The five stays</h2>
+    <h2>The four stays</h2>
+    <p class="sectionintro">Three rooms at every stop — one per couple. Rates below are per room, per night.</p>
     <div class="stays">
       <div class="staycard">
-        <div class="shot"><img src="images/castellammare.webp" alt="Castellammare del Golfo" loading="lazy"></div>
-        <div class="when">May 21 – 24 · 3 nights</div>
-        <div class="town">🌊 Castellammare del Golfo</div>
-        <p class="desc">Home base on the west coast, staying with Anna's family. Day trips to San Vito Lo Capo and time around town.</p>
+        <div class="shot"><img src="images/marina-di-petrolo-infinity-pool.webp" alt="The infinity pool at Marina di Petrolo" loading="lazy"></div>
+        <div class="when">May 21 – 24 · 3 nights · <span class="cur" data-usd="300">$300</span>/night</div>
+        <div class="town">🌊 Marina di Petrolo</div>
+        <p class="desc">Home base on the west coast in Castellammare del Golfo, with complimentary parking. Day trips to San Vito Lo Capo and time with Anna's family.</p>
+        <a class="btn" href="https://www.marinadipetrolo.it/en" target="_blank" rel="noopener">View hotel →</a>
       </div>
       <div class="staycard">
-        <div class="shot"><img src="images/cefalu.jpg" alt="Cefalù" loading="lazy"></div>
-        <div class="when">May 24 – 25 · 1 night</div>
-        <div class="town">🏖️ Cefalù</div>
-        <p class="desc">One evening in the postcard beach town under the Rocca — explore the old town and have dinner by the water. Hotel to be chosen.</p>
+        <div class="shot"><img src="images/hotel-riva-del-sole-patio-beach.jpg" alt="The terrace at Hotel Riva Del Sole in Cefalù" loading="lazy"></div>
+        <div class="when">May 24 – 26 · 2 nights · <span class="cur" data-usd="400">$400</span>/night</div>
+        <div class="town">🏖️ Hotel Riva Del Sole</div>
+        <p class="desc">Two nights in the postcard beach town under the Rocca — the old town, dinner by the water, and a pasta making class. Parking on site.</p>
+        <a class="btn" href="https://www.rivadelsole.com/hotel-riva-del-sole-cefalu-english/" target="_blank" rel="noopener">View hotel →</a>
       </div>
       <div class="staycard">
         <div class="shot"><img src="images/capotaormina-pool.jpeg" alt="The pool at Hotel Capo Taormina" loading="lazy"></div>
-        <div class="when">May 25 – 28 · 3 nights · ≈ $400/night</div>
+        <div class="when">May 26 – 29 · 3 nights · <span class="cur" data-usd="400">$400</span>/night</div>
         <div class="town">🎭 Capo Taormina</div>
-        <p class="desc">Incredible hotel built into the side of the cliff with an amazing pool and beach. Base for Mt Etna and downtown Taormina.</p>
+        <p class="desc">Incredible hotel built into the side of the cliff with an amazing pool and beach. Base for the Etna wineries and downtown Taormina. Parking €27/day.</p>
         <a class="btn" href="https://www.unaitalianhospitality.com/en/hotels/una-hotels-capotaormina" target="_blank" rel="noopener">View hotel →</a>
       </div>
       <div class="staycard">
-        <div class="shot"><img src="images/catania.jpeg" alt="Catania" loading="lazy"></div>
-        <div class="when">May 28 – 29 · 1 night</div>
-        <div class="town">🌋 Catania</div>
-        <p class="desc">Last night on the island — dinner in Catania before the morning flight to Rome. Hotel to be chosen.</p>
-      </div>
-      <div class="staycard">
         <div class="shot"><img src="images/qc-termeroma-pools.avif" alt="The outdoor pools at QC Termeroma" loading="lazy"></div>
-        <div class="when">May 29 – 30 · 1 night · ≈ $350</div>
-        <div class="town">🧖 QC Termeroma, Rome</div>
+        <div class="when">May 29 – 30 · 1 night · <span class="cur" data-usd="350">$350</span>/night</div>
+        <div class="town">🧖 QC Termeroma</div>
         <p class="desc">Wellness hotel with an amazing outdoor spa experience — the perfect wind-down before flying home.</p>
         <a class="btn" href="https://www.qcterme.com/destinations/roma" target="_blank" rel="noopener">View spa →</a>
       </div>
@@ -1555,7 +1771,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <td>Air Canada · AC 890</td>
             <td>19:45</td>
             <td>10:20 <span class="sub">(+1 day)</span></td>
-            <td>≈ $500 USD</td>
+            <td><span class="cur" data-usd="990">$990</span><div class="sub">round trip, per person</div></td>
           </tr>
           <tr>
             <td>Fri, May 21</td>
@@ -1563,26 +1779,223 @@ svg.leaflet-image-layer.leaflet-interactive path {
             <td>Ryanair · FR 8915</td>
             <td>14:40</td>
             <td>15:50</td>
-            <td>≈ $110 USD</td>
+            <td><span class="cur" data-usd="110">$110</span><div class="sub">per person</div></td>
           </tr>
           <tr>
             <td>Sat, May 29</td>
             <td><span class="fn">Catania → Rome</span></td>
-            <td>ITA Airways · AZ 1724</td>
-            <td>12:00</td>
-            <td>13:30</td>
-            <td>≈ $100 USD</td>
+            <td>ITA Airways · AZ 1754</td>
+            <td>15:25</td>
+            <td>16:45</td>
+            <td><span class="cur" data-usd="100">$100</span><div class="sub">per person</div></td>
           </tr>
           <tr>
             <td>Sun, May 30</td>
             <td><span class="fn">Rome → Toronto</span></td>
             <td>Air Canada · AC 891</td>
             <td>12:25</td>
-            <td>16:00</td>
-            <td>≈ $500 USD</td>
+            <td>14:00</td>
+            <td><span class="sub">in the round trip</span></td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BUDGET ================= -->
+<section id="budget">
+  <div class="wrap">
+    <div class="eyebrow2">The Money</div>
+    <h2>Budget per couple</h2>
+    <p class="sectionintro">What each of the three couples should plan for. Hotels are one room per couple; flights are for two people. The rental cars are a shared cost split three ways.</p>
+    <div class="curbar">
+      <div class="curswitch" role="group" aria-label="Show prices in">
+        <button type="button" data-cur="USD" aria-pressed="true">USD</button>
+        <button type="button" data-cur="EUR" aria-pressed="false">EUR</button>
+        <button type="button" data-cur="CAD" aria-pressed="false">CAD</button>
+      </div>
+      <div class="currate" id="currate"></div>
+    </div>
+    <div class="tablewrap">
+      <table class="budget" id="budget-booked">
+        <thead>
+          <tr><th>What</th><th>How it adds up</th><th class="amt">Per couple</th></tr>
+        </thead>
+        <tbody>
+          <tr data-amount="1980" data-group="flights">
+            <td class="cat">✈️ Toronto ↔ Rome</td>
+            <td><span class="cur" data-usd="990">$990</span> round trip × 2 people</td>
+            <td class="amt"><span class="cur" data-usd="1980">$1,980</span></td>
+          </tr>
+          <tr data-amount="220" data-group="flights">
+            <td class="cat">✈️ Rome → Trapani</td>
+            <td><span class="cur" data-usd="110">$110</span> × 2 people · Ryanair FR 8915</td>
+            <td class="amt"><span class="cur" data-usd="220">$220</span></td>
+          </tr>
+          <tr data-amount="200" data-group="flights">
+            <td class="cat">✈️ Catania → Rome</td>
+            <td><span class="cur" data-usd="100">$100</span> × 2 people · ITA Airways AZ 1754</td>
+            <td class="amt"><span class="cur" data-usd="200">$200</span></td>
+          </tr>
+          <tr class="subtotal">
+            <td>Flights subtotal</td>
+            <td></td>
+            <td class="amt"><span class="cur" id="sub-flights" data-usd="2400">$0</span></td>
+          </tr>
+          <tr class="shared-row" data-amount="533.333" data-group="cars">
+            <td class="cat">🚗 Two rental cars <span class="shared">Shared</span></td>
+            <td><span class="cur" data-usd="800">$800</span> × 2 cars = <span class="cur" data-usd="1600">$1,600</span> total, split 3 ways</td>
+            <td class="amt"><span class="cur" data-usd="533.333">$533</span></td>
+          </tr>
+          <tr class="shared-row" data-amount="203.333" data-group="cars">
+            <td class="cat">🅿️ Parking at Pearson <span class="shared">Shared</span></td>
+            <td><span class="cur" data-usd="305">$305</span> × 2 vehicles = <span class="cur" data-usd="610">$610</span> for the 11 days, split 3 ways</td>
+            <td class="amt"><span class="cur" data-usd="203.333">$203</span></td>
+          </tr>
+          <tr class="subtotal">
+            <td>Cars &amp; parking subtotal</td>
+            <td></td>
+            <td class="amt"><span class="cur" id="sub-cars" data-usd="736.667">$0</span></td>
+          </tr>
+          <tr data-amount="900" data-group="hotels">
+            <td class="cat">🏨 Marina di Petrolo</td>
+            <td><span class="cur" data-usd="300">$300</span> × 3 nights · Castellammare</td>
+            <td class="amt"><span class="cur" data-usd="900">$900</span></td>
+          </tr>
+          <tr data-amount="800" data-group="hotels">
+            <td class="cat">🏨 Hotel Riva Del Sole</td>
+            <td><span class="cur" data-usd="400">$400</span> × 2 nights · Cefalù</td>
+            <td class="amt"><span class="cur" data-usd="800">$800</span></td>
+          </tr>
+          <tr data-amount="1200" data-group="hotels">
+            <td class="cat">🏨 Capo Taormina</td>
+            <td><span class="cur" data-usd="400">$400</span> × 3 nights · Taormina</td>
+            <td class="amt"><span class="cur" data-usd="1200">$1,200</span></td>
+          </tr>
+          <tr data-amount="350" data-group="hotels">
+            <td class="cat">🏨 QC Termeroma</td>
+            <td><span class="cur" data-usd="350">$350</span> × 1 night · Rome</td>
+            <td class="amt"><span class="cur" data-usd="350">$350</span></td>
+          </tr>
+          <tr class="subtotal">
+            <td>Hotels subtotal</td>
+            <td></td>
+            <td class="amt"><span class="cur" id="sub-hotels" data-usd="3250">$0</span></td>
+          </tr>
+          <tr class="total">
+            <td>Total per couple</td>
+            <td><span class="sub">≈ <span class="cur" id="total-person" data-usd="3193.333">$3,193</span> per person</span></td>
+            <td class="amt">≈ <span class="cur" id="total-couple" data-usd="6386.667">$6,387</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="budgetnote">That's what gets booked in advance — about <strong><span class="cur" id="total-all" data-usd="19160">$19,160</span></strong> for all three couples. Everything you actually spend once you're there is below.</p>
+
+    <h3 class="subhead">Spending money</h3>
+    <p class="sectionintro">What to carry on top of the booked costs. Food is the big one, so pick the level that sounds like your trip.</p>
+    <div class="tablewrap">
+      <table class="budget" id="budget-spend">
+        <thead>
+          <tr><th>What</th><th>How it adds up</th><th class="amt">Per couple</th></tr>
+        </thead>
+        <tbody>
+          <tr id="food-row" data-amount="1600">
+            <td class="cat">🍝 Food &amp; drink</td>
+            <td>
+              <div class="foodpick">
+                <div class="curswitch foodswitch" role="group" aria-label="Food and drink level">
+                  <button type="button" data-food="modest" aria-pressed="false">Modest</button>
+                  <button type="button" data-food="comfortable" aria-pressed="true">Comfortable</button>
+                  <button type="button" data-food="generous" aria-pressed="false">Generous</button>
+                </div>
+                <span class="foodblurb" id="foodnote"></span>
+              </div>
+              <div class="foodbasis">≈ <span class="cur" id="food-rate" data-usd="160">$160</span> per couple per day × 10 days</div>
+              <div class="foodbasis">Breakfast is included at all four hotels</div>
+            </td>
+            <td class="amt"><span class="cur" id="food-amt" data-usd="1600">$1,600</span></td>
+          </tr>
+          <tr data-amount="50">
+            <td class="cat">🧾 City tourist tax</td>
+            <td>€2–3 per person per night × 9 nights · collected at each hotel, often in cash</td>
+            <td class="amt"><span class="cur" data-usd="50">$50</span></td>
+          </tr>
+          <tr data-amount="120">
+            <td class="cat">🧳 Ryanair bags + seats</td>
+            <td>Checked bag and seat selection aren't in the <span class="cur" data-usd="110">$110</span> fare · 2 people</td>
+            <td class="amt"><span class="cur" data-usd="120">$120</span></td>
+          </tr>
+          <tr class="shared-row" data-amount="75">
+            <td class="cat">⛽ Fuel <span class="shared">Shared</span></td>
+            <td>~800 km per car over the route and day trips, 2 cars, split 3 ways</td>
+            <td class="amt"><span class="cur" data-usd="75">$75</span></td>
+          </tr>
+          <tr class="shared-row" data-amount="60">
+            <td class="cat">🅿️ Parking at Capo Taormina <span class="shared">Shared</span></td>
+            <td>€27/day × 3 nights × 2 cars, split 3 ways</td>
+            <td class="amt"><span class="cur" data-usd="60">$60</span></td>
+          </tr>
+          <tr class="shared-row" data-amount="25">
+            <td class="cat">🛣️ Motorway tolls <span class="shared">Shared</span></td>
+            <td>A20 Palermo–Messina and A18 Messina–Catania, split 3 ways</td>
+            <td class="amt"><span class="cur" data-usd="25">$25</span></td>
+          </tr>
+          <tr class="grouphead">
+            <td colspan="3">Up to you <span class="hint">— untick anything you'd rather not plan for</span></td>
+          </tr>
+          <tr class="opt-row" data-amount="300">
+            <td class="cat"><label class="optcheck"><input type="checkbox" data-opt="pasta" checked> <span>🍝 Pasta making class</span></label></td>
+            <td><span class="cur" data-usd="150">$150</span> × 2 people · Cefalù, May 25</td>
+            <td class="amt"><span class="amtsym"></span><input class="amtinput" data-amt="pasta" type="number" min="0" step="10" value="300" aria-label="Pasta making class budget"></td>
+          </tr>
+          <tr class="opt-row" data-amount="100">
+            <td class="cat"><label class="optcheck"><input type="checkbox" data-opt="wine" checked> <span>🍷 Etna wine + food pairing</span></label></td>
+            <td><span class="cur" data-usd="50">$50</span> × 2 people · May 27</td>
+            <td class="amt"><span class="amtsym"></span><input class="amtinput" data-amt="wine" type="number" min="0" step="10" value="100" aria-label="Etna wine and food pairing budget"></td>
+          </tr>
+          <tr class="opt-row" data-amount="100">
+            <td class="cat"><label class="optcheck"><input type="checkbox" data-opt="car" checked> <span>🚙 Private car to the wineries</span></label></td>
+            <td><span class="cur" data-usd="100">$100</span> per couple · May 27</td>
+            <td class="amt"><span class="amtsym"></span><input class="amtinput" data-amt="car" type="number" min="0" step="10" value="100" aria-label="Private car to the wineries budget"></td>
+          </tr>
+          <tr class="opt-row" data-amount="150">
+            <td class="cat"><label class="optcheck"><input type="checkbox" data-opt="beach" checked> <span>🏖️ Beach clubs, sites &amp; entries</span></label></td>
+            <td>Greek theatre, Rocca di Cefalù, loungers at Isola Bella and San Vito</td>
+            <td class="amt"><span class="amtsym"></span><input class="amtinput" data-amt="beach" type="number" min="0" step="10" value="150" aria-label="Beach clubs, sites and entries budget"></td>
+          </tr>
+          <tr class="opt-row" data-amount="120">
+            <td class="cat"><label class="optcheck"><input type="checkbox" data-opt="insurance" checked> <span>🛡️ Travel insurance</span></label></td>
+            <td>Varies a lot with age and coverage, so get a real quote</td>
+            <td class="amt"><span class="amtsym"></span><input class="amtinput" data-amt="insurance" type="number" min="0" step="10" value="120" aria-label="Travel insurance budget"></td>
+          </tr>
+          <tr class="opt-row" data-amount="400">
+            <td class="cat"><label class="optcheck"><input type="checkbox" data-opt="shopping" checked> <span>🛍️ Shopping &amp; souvenirs</span></label></td>
+            <td>Ceramics, Corso Umberto, market finds</td>
+            <td class="amt"><span class="amtsym"></span><input class="amtinput" data-amt="shopping" type="number" min="0" step="10" value="400" aria-label="Shopping and souvenirs budget"></td>
+          </tr>
+          <tr class="grouphead">
+            <td colspan="3">Buffer <span class="hint">— a cushion over the whole trip, booked costs included</span></td>
+          </tr>
+          <tr id="buffer-row" data-amount="464.333">
+            <td class="cat">🧮 Buffer</td>
+            <td><label><input class="pctinput" id="buffer-pct" type="number" value="5" min="0" max="100" step="1" aria-label="Buffer percentage"> % of the whole trip — booked costs and spending alike</label></td>
+            <td class="amt"><span class="cur" id="buffer-amt" data-usd="464.333">$464</span></td>
+          </tr>
+          <tr class="total">
+            <td>Spending money per couple</td>
+            <td><span class="sub">≈ <span class="cur" id="spend-person" data-usd="1787.167">$1,787</span> per person</span></td>
+            <td class="amt">≈ <span class="cur" id="spend-couple" data-usd="3574.333">$3,574</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grandtotal">
+      <div class="lbl">Plan for, all in</div>
+      <div class="big">≈ <span class="cur" id="grand-couple" data-usd="9751">$9,751</span> per couple</div>
+      <div class="brk"><span class="cur" id="grand-booked" data-usd="6386.667">$6,387</span> booked + <span class="cur" id="grand-spend" data-usd="3574.333">$3,574</span> spending · about <span class="cur" id="grand-all" data-usd="29883">$29,883</span> for all three couples</div>
     </div>
   </div>
 </section>
@@ -1594,16 +2007,28 @@ svg.leaflet-image-layer.leaflet-interactive path {
     <h2>Before we go</h2>
     <div class="notes">
       <div class="notecard">
-        <div class="nt">🚗 The rental car</div>
-        <p>We pick up a car in Trapani on May 21 and drive the whole northern route — Castellammare → Cefalù → Taormina → Catania. Drop-off details still to be sorted.</p>
+        <div class="nt">🚗 The two rental cars</div>
+        <p>Two Hertz cars — an Opel Corsa or similar, since six people plus three full-size bags won't fit in one. Picked up in Trapani on May 21, dropped off in Catania on May 29. <span class="cur" data-usd="800">$800</span> each.</p>
       </div>
       <div class="notecard">
         <div class="nt">🕐 The overnight flight</div>
-        <p>AC 890 leaves Toronto Thursday evening and lands in Rome Friday morning — so May 21 starts in Italy, a little jet-lagged and very excited.</p>
+        <p>AC 890 leaves Toronto Thursday evening and lands in Rome Friday morning — so May 21 starts in Italy, a little jet-lagged and very excited. The <span class="cur" data-usd="990">$990</span> fare is round trip and covers the flight home.</p>
+      </div>
+      <div class="notecard">
+        <div class="nt">🛏️ Three rooms everywhere</div>
+        <p>Every hotel is booked as three rooms, one per couple, so the nightly rates on this page are per room. Nothing is booked yet.</p>
       </div>
       <div class="notecard">
         <div class="nt">💶 About the prices</div>
-        <p>All prices on this page are estimates from our planning sheet, in USD. Flights and hotels aren't locked in yet, so numbers may shift.</p>
+        <p>All prices are estimates from our planning sheet, kept in USD and converted for display. Nothing is booked yet, so numbers may shift — treat the spending money table as a starting point, not a quote.</p>
+      </div>
+      <div class="notecard">
+        <div class="nt">🚫 Watch the ZTL zones</div>
+        <p>Taormina and Cefalù have camera-enforced restricted traffic zones in their historic centres. Drive into one and the fine turns up by mail months later. Park outside the centre and walk in.</p>
+      </div>
+      <div class="notecard">
+        <div class="nt">💵 Carry some cash</div>
+        <p>The city tourist tax is often collected in cash at checkout, and smaller places in Castellammare and San Vito may not take cards. Bring euros for the first day or two.</p>
       </div>
     </div>
     <div class="sheetbox">
@@ -1696,6 +2121,210 @@ const D4=[[37.8461,15.2966],[37.8539,15.3009],[37.86,15.2953],[37.8686,15.2967],
   drive('map-d4',D4,'Taormina','Catania','left','right');
   flight('map-f3',CTA,FCO,'Catania','Rome','bottom','top');
   flight('map-f4',FCO,YYZ,'Rome','Toronto');
+})();
+</script>
+
+<script>
+/* ---------- Currency switch ----------
+   Every price on the page is stored in USD on a data-usd attribute and
+   re-rendered here, so there is nothing to keep in sync by hand.
+   Update these two rates (and the date) whenever you want fresher numbers. */
+(function(){
+  const RATES   = { USD: 1, EUR: 0.92, CAD: 1.37 };
+  const AS_OF   = 'Aug 2026';
+  const KEY     = 'sicily-currency';
+
+  const els     = document.querySelectorAll('.cur');
+  const buttons = document.querySelectorAll('.curswitch:not(.foodswitch) button');
+  const rateEl  = document.getElementById('currate');
+
+  const fmt = {}, rateFmt = {};
+  Object.keys(RATES).forEach(function(c){
+    fmt[c]     = new Intl.NumberFormat('en-US',{style:'currency',currency:c,maximumFractionDigits:0});
+    rateFmt[c] = new Intl.NumberFormat('en-US',{style:'currency',currency:c,minimumFractionDigits:2});
+  });
+
+  function symbol(cur){
+    const parts = fmt[cur].formatToParts(1);
+    for(let i = 0; i < parts.length; i++){
+      if(parts[i].type === 'currency') return parts[i].value;
+    }
+    return '$';
+  }
+
+  function render(cur){
+    if(!RATES[cur]) cur = 'USD';
+    els.forEach(function(el){
+      const usd = parseFloat(el.getAttribute('data-usd'));
+      if(!isNaN(usd)) el.textContent = fmt[cur].format(usd * RATES[cur]);
+    });
+    /* editable amounts read and write in whatever currency is on screen —
+       skip the one being typed into so the caret doesn't jump */
+    document.querySelectorAll('.amtsym').forEach(function(el){ el.textContent = symbol(cur); });
+    amtInputs.forEach(function(input){
+      if(document.activeElement === input) return;
+      const row = input.closest('tr');
+      const usd = parseFloat(row.getAttribute('data-amount'));
+      if(!isNaN(usd)) input.value = Math.ceil(usd * RATES[cur]);
+    });
+    buttons.forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.cur === cur));
+    });
+    if(rateEl){
+      rateEl.textContent = cur === 'USD'
+        ? 'The planning sheet is kept in USD'
+        : '$1.00 USD = ' + rateFmt[cur].format(RATES[cur]) + ' · rate as of ' + AS_OF;
+    }
+    try{ localStorage.setItem(KEY, cur); }catch(e){}
+  }
+
+  /* Two tables: what gets booked up front, and what you spend once you're there.
+     Rows carry their per-couple cost; totals are summed from whatever is ticked
+     (and whichever food level is picked), then handed back to render(). */
+  const bookedRows = document.querySelectorAll('#budget-booked tbody tr[data-amount]');
+  const spendRows  = document.querySelectorAll('#budget-spend  tbody tr[data-amount]:not(#buffer-row)');
+  const bufferPct  = document.getElementById('buffer-pct');
+  const amtInputs  = document.querySelectorAll('.amtinput');
+  const BUFKEY     = 'sicily-buffer';
+  const AMTKEY     = 'sicily-amounts';
+  const boxes      = document.querySelectorAll('.budget input[data-opt]');
+  const foodBtns   = document.querySelectorAll('.foodswitch button');
+  const foodNote   = document.getElementById('foodnote');
+  const OPTKEY     = 'sicily-extras';
+  const FOODKEY    = 'sicily-food';
+
+  const FOOD = {
+    modest:      { perDay: 110, blurb: 'Trattorias, house wine, arancini and granita lunches' },
+    comfortable: { perDay: 160, blurb: 'A nicer dinner every few nights, cocktails, the Taormina markup' },
+    generous:    { perDay: 220, blurb: 'Seafood dinners in Taormina and Rome, wine upgrades' }
+  };
+  const FOOD_DAYS = 10;
+  let foodLevel = 'comfortable';
+
+  function setUsd(id, value){
+    const el = document.getElementById(id);
+    if(el) el.setAttribute('data-usd', value);
+  }
+
+  function groupTotals(rows){
+    const out = {};
+    rows.forEach(function(tr){
+      const g = tr.getAttribute('data-group');
+      if(!g) return;
+      const box = tr.querySelector('input[data-opt]');
+      if(box && !box.checked) return;
+      out[g] = (out[g] || 0) + (parseFloat(tr.getAttribute('data-amount')) || 0);
+    });
+    return out;
+  }
+
+  function sum(rows){
+    let total = 0;
+    rows.forEach(function(tr){
+      const box = tr.querySelector('input[data-opt]');
+      const on  = !box || box.checked;
+      tr.classList.toggle('off', !on);
+      if(on) total += parseFloat(tr.getAttribute('data-amount')) || 0;
+    });
+    return total;
+  }
+
+  function recalc(){
+    // food level drives its own row before the spend table is summed
+    const food = FOOD[foodLevel] || FOOD.comfortable;
+    const foodTotal = food.perDay * FOOD_DAYS;
+    const foodRow = document.getElementById('food-row');
+    if(foodRow) foodRow.setAttribute('data-amount', foodTotal);
+    setUsd('food-rate', food.perDay);
+    setUsd('food-amt',  foodTotal);
+    foodBtns.forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.food === foodLevel));
+    });
+    if(foodNote) foodNote.textContent = food.blurb;
+
+    const booked    = sum(bookedRows);
+    const spendBase = sum(spendRows);
+
+    // buffer is a percentage of the whole trip — booked costs and spending alike
+    const pct    = bufferPct ? Math.min(100, Math.max(0, parseFloat(bufferPct.value) || 0)) : 0;
+    const buffer = (booked + spendBase) * pct / 100;
+    const bufferRow = document.getElementById('buffer-row');
+    if(bufferRow) bufferRow.setAttribute('data-amount', buffer);
+    setUsd('buffer-amt', buffer);
+    const spend = spendBase + buffer;
+
+    const g = groupTotals(bookedRows);
+    setUsd('sub-flights', g.flights || 0);
+    setUsd('sub-cars',    g.cars    || 0);
+    setUsd('sub-hotels',  g.hotels  || 0);
+
+    setUsd('total-couple', booked);
+    setUsd('total-person', booked / 2);
+    setUsd('total-all',    booked * 3);
+
+    setUsd('spend-couple', spend);
+    setUsd('spend-person', spend / 2);
+
+    setUsd('grand-booked', booked);
+    setUsd('grand-spend',  spend);
+    setUsd('grand-couple', booked + spend);
+    setUsd('grand-all',   (booked + spend) * 3);
+
+    try{
+      const off = Array.from(boxes).filter(function(b){ return !b.checked; }).map(function(b){ return b.dataset.opt; });
+      localStorage.setItem(OPTKEY, JSON.stringify(off));
+      localStorage.setItem(FOODKEY, foodLevel);
+      if(bufferPct) localStorage.setItem(BUFKEY, bufferPct.value);
+      const amounts = {};
+      amtInputs.forEach(function(input){
+        amounts[input.dataset.amt] = input.closest('tr').getAttribute('data-amount');
+      });
+      localStorage.setItem(AMTKEY, JSON.stringify(amounts));
+    }catch(e){}
+  }
+
+  let current = 'USD';
+  function apply(cur){
+    if(cur) current = cur;
+    recalc();
+    render(current);
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.cur); });
+  });
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){ apply(); });
+  });
+  foodBtns.forEach(function(b){
+    b.addEventListener('click', function(){ foodLevel = b.dataset.food; apply(); });
+  });
+  if(bufferPct){
+    bufferPct.addEventListener('input', function(){ apply(); });
+  }
+  amtInputs.forEach(function(input){
+    input.addEventListener('input', function(){
+      const shown = Math.max(0, parseFloat(input.value) || 0);
+      input.closest('tr').setAttribute('data-amount', shown / RATES[current]);
+      apply();
+    });
+  });
+
+  try{
+    current = localStorage.getItem(KEY) || 'USD';
+    const off = JSON.parse(localStorage.getItem(OPTKEY) || '[]');
+    boxes.forEach(function(b){ b.checked = off.indexOf(b.dataset.opt) === -1; });
+    const savedFood = localStorage.getItem(FOODKEY);
+    if(savedFood && FOOD[savedFood]) foodLevel = savedFood;
+    const savedBuf = localStorage.getItem(BUFKEY);
+    if(bufferPct && savedBuf !== null && savedBuf !== '') bufferPct.value = savedBuf;
+    const savedAmts = JSON.parse(localStorage.getItem(AMTKEY) || '{}');
+    amtInputs.forEach(function(input){
+      const saved = parseFloat(savedAmts[input.dataset.amt]);
+      if(!isNaN(saved)) input.closest('tr').setAttribute('data-amount', saved);
+    });
+  }catch(e){}
+  apply(current);
 })();
 </script>
 
